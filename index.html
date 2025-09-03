@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phoenix Vape & Coffee | Link Bio</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .overlay {
+      background: rgba(20, 20, 20, 0.85);
+      padding: 40px 20px;
+      border-radius: 16px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 25px rgba(255, 77, 0, 0.6);
+    }
+
+    .logo {
+      width: 120px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 10px #ff4d00);
+    }
+
+    /* Judul dengan animasi huruf jatuh & memantul */
+    .falling-text span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(-200px);
+      animation: bounceIn 1.8s forwards, glow 2s infinite alternate;
+      animation-delay: var(--delay), calc(var(--delay) + 1.8s);
+      text-shadow: 0 0 5px #ff4d00, 0 0 15px #ff8800;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    @keyframes bounceIn {
+      0%   { opacity: 0; transform: translateY(-200px); }
+      40%  { opacity: 1; transform: translateY(0); }
+      55%  { transform: translateY(-60px); }
+      70%  { transform: translateY(0); }
+      80%  { transform: translateY(-30px); }
+      90%  { transform: translateY(0); }
+      95%  { transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Glow bernafas */
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #ff4d00, 0 0 10px #ff8800, 0 0 15px #ffbb33;
+      }
+      to {
+        text-shadow: 0 0 10px #ff6600, 0 0 20px #ffaa33, 0 0 30px #ffee33;
+      }
+    }
+
+    p {
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    .link-btn {
+      display: block;
+      background: linear-gradient(45deg, #ff4d00, #ff8800);
+      color: #fff;
+      text-decoration: none;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 12px 0;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0 0 12px rgba(255, 77, 0, 0.8);
+    }
+
+    .link-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 136, 0, 1);
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <!-- Logo -->
+    <img src="logo.png" alt="Phoenix Logo" class="logo">
+
+    <!-- Judul Animasi -->
+    <h1 class="falling-text" id="title">Phoenix Vape & Coffee</h1>
+
+    <p>🚬 Vape Premium | ☕ Coffee Hangout | 🎉 Event Seru</p>
+
+    <!-- Links -->
+    <a href="https://www.youtube.com/@PhoenixOfficial-r6j" class="link-btn">📺 YouTube</a>
+    <a href="https://www.tiktok.com/@phoenixvsofficial" class="link-btn">🎵 TikTok</a>
+    <a href="https://phoenixvape.web.id/" class="link-btn">🌐 Website Resmi</a>
+  </div>
+
+  <script>
+    // Animasi huruf jatuh satu per satu
+    const title = document.getElementById("title");
+    const text = title.innerText;
+    title.innerHTML = "";
+
+    [...text].forEach((char, i) => {
+      const span = document.createElement("span");
+      span.innerText = char === " " ? "\u00A0" : char;
+      span.style.setProperty("--delay", `${i * 0.15}s`);
+      title.appendChild(span);
+    });
+  </script>
+</body>
+</html>
