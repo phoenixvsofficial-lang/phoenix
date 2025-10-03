@@ -272,13 +272,14 @@
       text-shadow: 0 0 8px rgba(255, 204, 102, 0.5);
     }
 
+    /* PERBAIKAN: Animasi dropdown yang lebih smooth */
     .locations-list {
       display: block;
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      transform: translateY(-10px);
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(-8px);
+      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
       margin-top: 0;
       position: relative;
       border-radius: 12px;
@@ -296,18 +297,6 @@
       background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      animation: listAppear 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    @keyframes listAppear {
-      0% {
-        opacity: 0;
-        transform: translateY(-10px) scale(0.98);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
     }
     
     /* Efek gradient buat kasih tau ada yang bisa di-scroll */
@@ -322,15 +311,14 @@
       pointer-events: none;
       border-radius: 0 0 12px 12px;
       opacity: 0;
-      animation: fadeInOverlay 0.3s ease 0.4s forwards;
-    }
-
-    @keyframes fadeInOverlay {
-      to {
-        opacity: 1;
-      }
+      transition: opacity 0.3s ease 0.3s;
     }
     
+    .locations-list.show::after {
+      opacity: 1;
+    }
+
+    /* ANIMASI BARU: GLOW PULSE EFFECT yang lebih smooth */
     .locations-list a {
       display: block;
       color: #fff;
@@ -341,20 +329,35 @@
       font-weight: 600;
       letter-spacing: 0.5px;
       text-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       position: relative;
       overflow: hidden;
+      
+      /* GLOW PULSE ANIMATION yang diperbaiki */
       opacity: 0;
-      transform: translateX(-10px);
-      animation: listItemAppear 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-      cursor: pointer;
+      transform: scale(0.95) translateY(5px);
+      animation: glowAppear 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      box-shadow: 0 0 0 rgba(255, 102, 0, 0);
+      border-radius: 8px;
+      margin: 4px 0;
     }
 
-    @keyframes listItemAppear {
-      to {
+    @keyframes glowAppear {
+      0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(5px);
+        box-shadow: 0 0 0 rgba(255, 102, 0, 0);
+      }
+      50% {
         opacity: 1;
-        transform: translateX(0);
+        transform: scale(1.02) translateY(0);
+        box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        box-shadow: 0 0 12px rgba(255, 102, 0, 0.2);
       }
     }
     
@@ -370,7 +373,7 @@
       width: 100%;
       height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255, 204, 102, 0.15), transparent);
-      transition: left 0.5s ease;
+      transition: left 0.6s ease;
     }
     
     .locations-list a:hover::before {
@@ -379,26 +382,27 @@
     
     .locations-list a:hover {
       color: #ffcc66;
-      text-shadow: 0 0 12px rgba(255, 204, 102, 1);
-      transform: translateX(5px);
+      text-shadow: 0 0 15px rgba(255, 204, 102, 1);
+      transform: translateX(3px) scale(1.02);
       padding-left: 8px;
-      background: rgba(255, 102, 0, 0.1);
-      border-radius: 6px;
+      background: rgba(255, 102, 0, 0.15);
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255, 102, 0, 0.4) !important;
     }
 
-    /* Biar item-itemnya munculnya berurutan kayak domino */
-    .locations-list a:nth-child(1) { animation-delay: 0.05s; }
-    .locations-list a:nth-child(2) { animation-delay: 0.08s; }
-    .locations-list a:nth-child(3) { animation-delay: 0.11s; }
-    .locations-list a:nth-child(4) { animation-delay: 0.14s; }
-    .locations-list a:nth-child(5) { animation-delay: 0.17s; }
-    .locations-list a:nth-child(6) { animation-delay: 0.20s; }
-    .locations-list a:nth-child(7) { animation-delay: 0.23s; }
-    .locations-list a:nth-child(8) { animation-delay: 0.26s; }
-    .locations-list a:nth-child(9) { animation-delay: 0.29s; }
-    .locations-list a:nth-child(10) { animation-delay: 0.32s; }
-    .locations-list a:nth-child(11) { animation-delay: 0.35s; }
-    .locations-list a:nth-child(12) { animation-delay: 0.38s; }
+    /* Stagger animation untuk setiap item - lebih smooth */
+    .locations-list.show a:nth-child(1) { animation-delay: 0.1s; }
+    .locations-list.show a:nth-child(2) { animation-delay: 0.15s; }
+    .locations-list.show a:nth-child(3) { animation-delay: 0.2s; }
+    .locations-list.show a:nth-child(4) { animation-delay: 0.25s; }
+    .locations-list.show a:nth-child(5) { animation-delay: 0.3s; }
+    .locations-list.show a:nth-child(6) { animation-delay: 0.35s; }
+    .locations-list.show a:nth-child(7) { animation-delay: 0.4s; }
+    .locations-list.show a:nth-child(8) { animation-delay: 0.45s; }
+    .locations-list.show a:nth-child(9) { animation-delay: 0.5s; }
+    .locations-list.show a:nth-child(10) { animation-delay: 0.55s; }
+    .locations-list.show a:nth-child(11) { animation-delay: 0.6s; }
+    .locations-list.show a:nth-child(12) { animation-delay: 0.65s; }
 
     /* Scrollbar yang estetik */
     .locations-list::-webkit-scrollbar {
@@ -460,7 +464,7 @@
     <!-- Pilihan Cabang-cabang -->
     <h2>📍 Lokasi Cabang</h2>
     <button class="dropbtn">Pilih Cabang</button>
-    <div class="scroll-indicator">lihat toko terdekat dari posisi kamu</div>
+    <div class="scroll-indicator">lihat store yang terdekat dari lokasi kamu</div>
     
     <div class="locations-list" id="branchList">
       <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Alam+Sutera" target="_blank">🏪 Store 1 - Alam Sutera</a>
@@ -478,7 +482,7 @@
     </div>
 
     <!-- Ajakan buat follow -->
-    <div class="cta">👉 Gas follow Instagram, TikTok & YouTube biar gak ketinggalan event!</div>
+    <div class="cta">👉 Gas follow Instagram, TikTok & YouTube kami biar gak ketinggalan event!</div>
 
     <footer>© 2025 Phoenix Vape & Coffee</footer>
   </div>
@@ -489,24 +493,43 @@
     const whatsappBtn = document.getElementById('whatsappBtn');
     let isAnimating = false;
 
-    // Buat buka/tutup list cabang
+    // PERBAIKAN: Animasi dropdown yang lebih smooth
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       
       if (isAnimating) return;
       isAnimating = true;
       
+      // Reset animasi items dulu
+      const items = list.querySelectorAll('a');
+      items.forEach(item => {
+        item.style.animation = 'none';
+      });
+      
+      // Toggle show class
       list.classList.toggle('show');
       
-      // Biar gak bisa diklik berkali-kali pas animasi
+      // Trigger reflow untuk restart animasi
+      void list.offsetWidth;
+      
+      // Apply animasi ke items dengan delay
+      if (list.classList.contains('show')) {
+        items.forEach((item, index) => {
+          setTimeout(() => {
+            item.style.animation = `glowAppear 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
+          }, index * 50 + 100);
+        });
+      }
+      
+      // Reset animation state
       setTimeout(() => {
         isAnimating = false;
-      }, 500);
+      }, 800);
     });
 
     // Tutup list kalo klik di luar
     window.addEventListener('click', (e) => {
-      if (!e.target.matches('.dropbtn') && !e.target.matches('.locations-list a') && !isAnimating) {
+      if (!e.target.matches('.dropbtn') && !e.target.matches('.locations-list a') && !isAnimating && list.classList.contains('show')) {
         list.classList.remove('show');
       }
     });
