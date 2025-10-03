@@ -5,114 +5,134 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Phoenix Vape & Coffee | Link Bio</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap');
+
     body {
+      margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      background: radial-gradient(circle at top, #ff4d00, #1a1a1a 70%);
       color: #fff;
-      text-align: center;
-      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
     }
 
-    .overlay {
-      background: rgba(20, 20, 20, 0.85);
-      padding: 40px 20px;
-      border-radius: 16px;
-      max-width: 500px;
-      margin: auto;
-      box-shadow: 0 0 25px rgba(255, 77, 0, 0.6);
+    .container {
+      position: relative;
+      background: rgba(20, 20, 20, 0.9);
+      border-radius: 20px;
+      padding: 40px 25px;
+      max-width: 420px;
+      text-align: center;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* Border RGB glowing di pinggir */
+    .container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 20px;
+      padding: 3px; /* tebal border */
+      background: linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        lime,
+        cyan,
+        blue,
+        magenta,
+        red
+      );
+      background-size: 400%;
+      animation: rgbBorder 6s linear infinite;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      z-index: -1;
+    }
+
+    @keyframes rgbBorder {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .logo {
-      width: 120px;
+      width: 100px;
       margin-bottom: 15px;
-      filter: drop-shadow(0 0 10px #ff4d00);
+      border-radius: 50%;
+      border: 2px solid #ff6600;
+      padding: 5px;
+      background: #111;
     }
 
-    /* Judul dengan animasi huruf jatuh & memantul */
-    .falling-text span {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(-200px);
-      animation: bounceIn 1.8s forwards, glow 2s infinite alternate;
-      animation-delay: var(--delay), calc(var(--delay) + 1.8s);
-      text-shadow: 0 0 5px #ff4d00, 0 0 15px #ff8800;
+    h1 {
+      font-family: 'Playfair Display', serif;
       font-size: 1.8rem;
-      font-weight: 700;
-    }
-
-    @keyframes bounceIn {
-      0%   { opacity: 0; transform: translateY(-200px); }
-      40%  { opacity: 1; transform: translateY(0); }
-      55%  { transform: translateY(-60px); }
-      70%  { transform: translateY(0); }
-      80%  { transform: translateY(-30px); }
-      90%  { transform: translateY(0); }
-      95%  { transform: translateY(-10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Glow bernafas */
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 5px #ff4d00, 0 0 10px #ff8800, 0 0 15px #ffbb33;
-      }
-      to {
-        text-shadow: 0 0 10px #ff6600, 0 0 20px #ffaa33, 0 0 30px #ffee33;
-      }
+      margin-bottom: 10px;
+      color: #ff8800;
+      text-shadow: 0 0 8px rgba(255, 136, 0, 0.6);
     }
 
     p {
       color: #ccc;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
+      font-size: 0.95rem;
     }
 
     .link-btn {
       display: block;
-      background: linear-gradient(45deg, #ff4d00, #ff8800);
+      background: linear-gradient(135deg, #ff4d00, #ff8800);
       color: #fff;
       text-decoration: none;
-      padding: 15px;
-      border-radius: 10px;
+      padding: 14px;
+      border-radius: 12px;
       margin: 12px 0;
-      font-weight: bold;
-      transition: 0.3s;
-      box-shadow: 0 0 12px rgba(255, 77, 0, 0.8);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(255, 77, 0, 0.4);
     }
 
     .link-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 136, 0, 1);
+      background: linear-gradient(135deg, #ffaa33, #ff6600);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 136, 0, 0.6);
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: 0.8rem;
+      color: #777;
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
+  <div class="container">
     <!-- Logo -->
     <img src="logo.png" alt="Phoenix Logo" class="logo">
 
-    <!-- Judul Animasi -->
-    <h1 class="falling-text" id="title">Phoenix Vape & Coffee</h1>
-
+    <!-- Judul -->
+    <h1>Phoenix Vape & Coffee</h1>
     <p>🚬 Vape Premium | ☕ Coffee Hangout | 🎉 Event Seru</p>
 
-    <!-- Links -->
+    <!-- Link Buttons -->
     <a href="https://www.youtube.com/@PhoenixOfficial-r6j" class="link-btn">📺 YouTube</a>
     <a href="https://www.tiktok.com/@phoenixvs.official" class="link-btn">🎵 TikTok</a>
     <a href="https://phoenixvape.co.id/" class="link-btn">🌐 Website Resmi</a>
+
+    <footer>© 2025 Phoenix Vape & Coffee</footer>
   </div>
-
-  <script>
-    // Animasi huruf jatuh satu per satu
-    const title = document.getElementById("title");
-    const text = title.innerText;
-    title.innerHTML = "";
-
-    [...text].forEach((char, i) => {
-      const span = document.createElement("span");
-      span.innerText = char === " " ? "\u00A0" : char;
-      span.style.setProperty("--delay", `${i * 0.15}s`);
-      title.appendChild(span);
-    });
-  </script>
 </body>
 </html>
