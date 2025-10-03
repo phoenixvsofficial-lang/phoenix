@@ -4,8 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Phoenix Vape & Coffee | Link Bio</title>
+  <link rel="icon" type="image/png" href="logo.png">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -15,106 +22,423 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       padding: 20px;
+      overflow-x: hidden;
     }
 
     .container {
       position: relative;
-      background: rgba(20, 20, 20, 0.9);
-      border-radius: 20px;
-      padding: 40px 25px;
-      max-width: 420px;
+      background: rgba(20, 20, 20, 0.95);
+      border-radius: 24px;
+      padding: 45px 30px;
+      max-width: 440px;
+      width: 100%;
       text-align: center;
       overflow: hidden;
       z-index: 1;
+      animation: smoothAppear 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
-    /* Border RGB glowing di pinggir */
+    @keyframes smoothAppear {
+      0% { 
+        opacity: 0; 
+        transform: translateY(30px) scale(0.95);
+      }
+      100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Border RGB glowing yang keren abis */
     .container::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 20px;
-      padding: 3px; /* tebal border */
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 24px;
+      padding: 2.5px;
       background: linear-gradient(
-        90deg,
-        red,
-        orange,
-        yellow,
-        lime,
-        cyan,
-        blue,
-        magenta,
-        red
+        135deg,
+        #ff0000, #ff5500, #ffaa00, #ffff00, #88ff00, #00ffff, #0088ff, #8800ff, #ff00ff, #ff0000
       );
-      background-size: 400%;
-      animation: rgbBorder 6s linear infinite;
+      background-size: 400% 400%;
+      animation: rgbFlow 8s ease-in-out infinite;
       -webkit-mask: 
         linear-gradient(#fff 0 0) content-box, 
         linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
               mask-composite: exclude;
       z-index: -1;
+      filter: blur(0.5px);
     }
 
-    @keyframes rgbBorder {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes rgbFlow {
+      0%, 100% { 
+        background-position: 0% 50%;
+        filter: blur(0.5px) brightness(1);
+      }
+      50% { 
+        background-position: 100% 50%;
+        filter: blur(0.5px) brightness(1.2);
+      }
     }
 
     .logo {
-      width: 100px;
-      margin-bottom: 15px;
+      width: 110px;
+      margin-bottom: 20px;
       border-radius: 50%;
-      border: 2px solid #ff6600;
-      padding: 5px;
-      background: #111;
+      border: 3px solid rgba(255, 102, 0, 0.8);
+      padding: 6px;
+      background: rgba(17, 17, 17, 0.9);
+      animation: logoFloat 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 15px rgba(255, 102, 0, 0.4));
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(2deg); }
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
+      font-size: 2rem;
+      margin-bottom: 12px;
       color: #ff8800;
-      text-shadow: 0 0 8px rgba(255, 136, 0, 0.6);
+      text-shadow: 0 0 20px rgba(255, 136, 0, 0.8);
+      animation: textGlow 3s ease-in-out infinite alternate;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    @keyframes textGlow {
+      from { text-shadow: 0 0 20px rgba(255, 136, 0, 0.8); }
+      to { text-shadow: 0 0 30px rgba(255, 136, 0, 1), 0 0 40px rgba(255, 136, 0, 0.6); }
     }
 
     p {
-      color: #ccc;
+      color: #ddd;
       margin-bottom: 30px;
-      font-size: 0.95rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      animation: fadeInUp 1s ease 0.3s both;
     }
 
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Tombol-tombol yang bikin pengen pencet */
     .link-btn {
       display: block;
-      background: linear-gradient(135deg, #ff4d00, #ff8800);
-      color: #fff;
       text-decoration: none;
-      padding: 14px;
-      border-radius: 12px;
-      margin: 12px 0;
+      padding: 16px 20px;
+      border-radius: 16px;
+      margin: 14px 0;
       font-weight: 600;
-      transition: all 0.3s ease;
-      font-size: 1rem;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      font-size: 1.05rem;
       letter-spacing: 0.5px;
-      box-shadow: 0 4px 12px rgba(255, 77, 0, 0.4);
+      box-shadow: 
+        0 6px 20px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+      color: #fff !important;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1s ease 0.6s both;
+      border: none;
+      cursor: pointer;
     }
 
-    .link-btn:hover {
-      background: linear-gradient(135deg, #ffaa33, #ff6600);
+    .link-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .link-btn:hover::before {
+      left: 100%;
+    }
+
+    .link-btn:nth-child(1) { animation-delay: 0.6s; }
+    .link-btn:nth-child(2) { animation-delay: 0.7s; }
+    .link-btn:nth-child(3) { animation-delay: 0.8s; }
+    .link-btn:nth-child(4) { animation-delay: 0.9s; }
+
+    .youtube { 
+      background: linear-gradient(135deg, #ff0000, #cc0000);
+      transform: translateY(0);
+    }
+    .youtube:hover { 
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(255,0,0,0.4);
+    }
+
+    .tiktok { 
+      background: linear-gradient(135deg, #000, #ff0050, #00f2ea);
+      transform: translateY(0);
+    }
+    .tiktok:hover { 
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(255,0,80,0.3);
+    }
+
+    .website { 
+      background: linear-gradient(135deg, #ff4d00, #ff8800);
+      transform: translateY(0);
+    }
+    .website:hover { 
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(255,102,0,0.4);
+    }
+
+    .whatsapp { 
+      background: linear-gradient(135deg, #25d366, #1ebe5d);
+      transform: translateY(0);
+    }
+    .whatsapp:hover { 
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(37,211,102,0.4);
+    }
+
+    /* Dropdown buat pilih cabang */
+    h2 {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      color: #ffcc66;
+      text-shadow: 0 0 15px rgba(255, 204, 102, 0.6);
+      animation: fadeInUp 1s ease 1s both;
+    }
+
+    .dropbtn {
+      background: linear-gradient(135deg, #2979ff, #2962ff);
+      color: white;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 14px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(41, 121, 255, 0.3);
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      animation: fadeInUp 1s ease 1.1s both;
+      overflow: hidden;
+    }
+
+    .dropbtn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .dropbtn:hover::before {
+      left: 100%;
+    }
+
+    .dropbtn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 136, 0, 0.6);
+      box-shadow: 0 8px 25px rgba(41, 121, 255, 0.4);
+    }
+
+    /* Tulisan buat ngasih tau bisa di-scroll */
+    .scroll-indicator {
+      font-size: 0.75rem;
+      color: #ffcc66;
+      margin-top: 8px;
+      opacity: 0.9;
+      animation: fadeInUp 1s ease 1.1s both;
+      text-shadow: 0 0 8px rgba(255, 204, 102, 0.5);
+    }
+
+    .locations-list {
+      display: block;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-top: 0;
+      position: relative;
+      border-radius: 12px;
+      will-change: transform, opacity, max-height;
+    }
+    
+    .locations-list.show {
+      max-height: 220px;
+      opacity: 1;
+      transform: translateY(0);
+      margin-top: 12px;
+      overflow-y: auto;
+      border: 1px solid rgba(255, 102, 0, 0.4);
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      animation: listAppear 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes listAppear {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.98);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    /* Efek gradient buat kasih tau ada yang bisa di-scroll */
+    .locations-list.show::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background: linear-gradient(transparent, rgba(255, 102, 0, 0.2));
+      pointer-events: none;
+      border-radius: 0 0 12px 12px;
+      opacity: 0;
+      animation: fadeInOverlay 0.3s ease 0.4s forwards;
+    }
+
+    @keyframes fadeInOverlay {
+      to {
+        opacity: 1;
+      }
+    }
+    
+    .locations-list a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 0;
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(-10px);
+      animation: listItemAppear 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      cursor: pointer;
+    }
+
+    @keyframes listItemAppear {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    .locations-list a:last-child {
+      border-bottom: none;
+    }
+    
+    .locations-list a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 204, 102, 0.15), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .locations-list a:hover::before {
+      left: 100%;
+    }
+    
+    .locations-list a:hover {
+      color: #ffcc66;
+      text-shadow: 0 0 12px rgba(255, 204, 102, 1);
+      transform: translateX(5px);
+      padding-left: 8px;
+      background: rgba(255, 102, 0, 0.1);
+      border-radius: 6px;
+    }
+
+    /* Biar item-itemnya munculnya berurutan kayak domino */
+    .locations-list a:nth-child(1) { animation-delay: 0.05s; }
+    .locations-list a:nth-child(2) { animation-delay: 0.08s; }
+    .locations-list a:nth-child(3) { animation-delay: 0.11s; }
+    .locations-list a:nth-child(4) { animation-delay: 0.14s; }
+    .locations-list a:nth-child(5) { animation-delay: 0.17s; }
+    .locations-list a:nth-child(6) { animation-delay: 0.20s; }
+    .locations-list a:nth-child(7) { animation-delay: 0.23s; }
+    .locations-list a:nth-child(8) { animation-delay: 0.26s; }
+    .locations-list a:nth-child(9) { animation-delay: 0.29s; }
+    .locations-list a:nth-child(10) { animation-delay: 0.32s; }
+    .locations-list a:nth-child(11) { animation-delay: 0.35s; }
+    .locations-list a:nth-child(12) { animation-delay: 0.38s; }
+
+    /* Scrollbar yang estetik */
+    .locations-list::-webkit-scrollbar {
+      width: 5px;
+    }
+    .locations-list::-webkit-scrollbar-track {
+      background: rgba(255, 102, 0, 0.1);
+      border-radius: 3px;
+      margin: 5px 0;
+    }
+    .locations-list::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #ff6600, #ffaa00);
+      border-radius: 3px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .locations-list::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #ffaa00, #ffcc00);
+      transform: scale(1.05);
+    }
+
+    .cta {
+      margin-top: 30px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #ffb84d;
+      text-shadow: 0 0 10px rgba(255,184,77,0.7);
+      animation: fadeInUp 1s ease 1.2s both;
+      line-height: 1.5;
     }
 
     footer {
-      margin-top: 25px;
-      font-size: 0.8rem;
-      color: #777;
+      margin-top: 30px;
+      font-size: 0.85rem;
+      color: #999;
+      animation: fadeInUp 1s ease 1.3s both;
+    }
+
+    /* Biar scrollnya halus kayak di iPhone */
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
@@ -127,12 +451,107 @@
     <h1>Phoenix Vape & Coffee</h1>
     <p>🚬 Vape Premium | ☕ Coffee Hangout | 🎉 Event Seru</p>
 
-    <!-- Link Buttons -->
-    <a href="https://www.youtube.com/@PhoenixOfficial-r6j" class="link-btn">📺 YouTube</a>
-    <a href="https://www.tiktok.com/@phoenixvs.official" class="link-btn">🎵 TikTok</a>
-    <a href="https://phoenixvape.co.id/" class="link-btn">🌐 Website Resmi</a>
+    <!-- Tombol-tombol media sosmed -->
+    <a href="https://www.youtube.com/@PhoenixOfficial-r6j" class="link-btn youtube">📺 YouTube</a>
+    <a href="https://www.tiktok.com/@phoenixvs.official" class="link-btn tiktok">🎵 TikTok</a>
+    <a href="https://phoenixvape.co.id/" class="link-btn website">🌐 Website Resmi</a>
+    <a href="#" class="link-btn whatsapp" id="whatsappBtn">💬 WhatsApp</a>
+
+    <!-- Pilihan Cabang-cabang -->
+    <h2>📍 Lokasi Cabang</h2>
+    <button class="dropbtn">Pilih Cabang</button>
+    <div class="scroll-indicator">lihat toko terdekat dari posisi kamu</div>
+    
+    <div class="locations-list" id="branchList">
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Alam+Sutera" target="_blank">🏪 Store 1 - Alam Sutera</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Roxy" target="_blank">🏪 Store 2 - Roxy</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Pademangan" target="_blank">🏪 Store 3 - Pademangan</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Jembatan+Besi" target="_blank">🏪 Store 5 - Jembatan Besi</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Binus+Center" target="_blank">🏪 Store 6 - Binus Center</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Raden+Saleh" target="_blank">🏪 Store 7 - Raden Saleh</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Ciledug" target="_blank">🏪 Store 8 - Ciledug</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Ceger" target="_blank">🏪 Store 9 - Ceger</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Pluit" target="_blank">🏪 Store 11 - Pluit</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Mangga+Besar" target="_blank">🏪 Store 13 - Mangga Besar</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Lokasari" target="_blank">🏪 Store 18 - Lokasari</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Untar" target="_blank">🏪 Store 68 - Untar</a>
+    </div>
+
+    <!-- Ajakan buat follow -->
+    <div class="cta">👉 Gas follow Instagram, TikTok & YouTube biar gak ketinggalan event!</div>
 
     <footer>© 2025 Phoenix Vape & Coffee</footer>
   </div>
+
+  <script>
+    const btn = document.querySelector('.dropbtn');
+    const list = document.getElementById('branchList');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    let isAnimating = false;
+
+    // Buat buka/tutup list cabang
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      
+      if (isAnimating) return;
+      isAnimating = true;
+      
+      list.classList.toggle('show');
+      
+      // Biar gak bisa diklik berkali-kali pas animasi
+      setTimeout(() => {
+        isAnimating = false;
+      }, 500);
+    });
+
+    // Tutup list kalo klik di luar
+    window.addEventListener('click', (e) => {
+      if (!e.target.matches('.dropbtn') && !e.target.matches('.locations-list a') && !isAnimating) {
+        list.classList.remove('show');
+      }
+    });
+
+    // Efek diklik buat store-storenya
+    document.querySelectorAll('.locations-list a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        // Kasih efek tekan doang, biarin browser yang buka Maps
+        link.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          link.style.transform = '';
+        }, 200);
+      });
+    });
+
+    // FITUR BARU: Auto-format pesan WhatsApp
+    whatsappBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // Nomor WhatsApp Phoenix
+      const phoneNumber = '6285778919857';
+      
+      // Pesan yang auto-keisi
+      const message = "Hai Phoenix, saya tertarik dengan produk Phoenix, boleh info lebih lanjut?";
+      
+      // Encode pesan buat URL
+      const encodedMessage = encodeURIComponent(message);
+      
+      // Buat link WhatsApp
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+      
+      // Kasih efek klik dulu
+      whatsappBtn.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        whatsappBtn.style.transform = '';
+        
+        // Buka WhatsApp
+        window.open(whatsappUrl, '_blank');
+      }, 200);
+    });
+
+    // Biar animasinya halus pas halaman kebuka
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '1';
+    });
+  </script>
 </body>
 </html>
