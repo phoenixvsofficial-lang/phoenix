@@ -21,106 +21,184 @@
     *{margin:0;padding:0;box-sizing:border-box}
     body{
       font-family:'Poppins',sans-serif;
-      background:#000;
-      color:#fff;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
+      background:#000; color:#fff;
+      min-height:100vh; display:flex;
+      flex-direction:column; align-items:center;
       justify-content:flex-start;
-      padding:20px;
-      padding-bottom:180px;
-      position:relative;
-      overflow-x:hidden;
+      padding:20px; padding-bottom:200px;
+      position:relative; overflow-x:hidden;
     }
     body.noscroll{overflow:hidden;}
 
-    /* === Ember Canvas === */
-    #emberCanvas{position:fixed; inset:0; width:100%; height:100%; z-index:-1; pointer-events:none; background:#000;}
+    /* === Ember Canvas Global === */
+    #emberCanvas{
+      position:fixed; inset:0; width:100%; height:100%;
+      z-index:-1; pointer-events:none; background:#000;
+    }
 
     /* === Hero === */
-    .hero{text-align:center; margin:30px 0 20px; z-index:2;}
+    .hero{text-align:center; margin:10px 0 20px; z-index:2;}
     .hero img{
-      width:120px; border-radius:50%; border:5px solid var(--phoenix-orange);
-      padding:8px; margin-bottom:15px;
+      width:120px; border-radius:50%;
+      border:5px solid var(--phoenix-orange);
+      padding:8px;
       box-shadow:0 0 25px rgba(255,107,53,.8), 0 0 60px rgba(255,107,53,.4);
-      animation:glowPulse 3s ease-in-out infinite, heroFadeIn 1s ease forwards;
-      opacity:0; transform:translateY(-30px);
+      animation:glowPulse 3s ease-in-out infinite;
+      margin-bottom:12px; opacity:0; transform:translateY(-30px);
+      animation:heroFadeIn 1s ease forwards;
     }
     .hero h1{
       font-family:'Playfair Display',serif; font-size:2rem;
       color:var(--phoenix-orange); text-shadow:0 0 18px rgba(255,107,53,.85);
-      margin-bottom:8px; opacity:0; transform:translateY(-20px);
+      margin-bottom:6px; opacity:0; transform:translateY(-20px);
       animation:heroFadeIn 1s ease .3s forwards;
     }
-    .hero p{color:#ccc; font-size:.95rem; opacity:0; transform:translateY(-10px); animation:heroFadeIn 1s ease .6s forwards;}
-
-    @keyframes glowPulse{0%,100%{box-shadow:0 0 20px rgba(255,107,53,.6),0 0 60px rgba(255,140,70,.3)}50%{box-shadow:0 0 35px rgba(255,140,70,.9),0 0 90px rgba(255,140,70,.5)}}
+    .hero p{
+      color:#ccc; margin-top:2px; font-size:.95rem;
+      opacity:0; transform:translateY(-10px);
+      animation:heroFadeIn 1s ease .6s forwards;
+    }
+    @keyframes glowPulse{
+      0%,100%{box-shadow:0 0 20px rgba(255,107,53,.6),0 0 60px rgba(255,140,70,.3)}
+      50%{box-shadow:0 0 35px rgba(255,140,70,.9),0 0 90px rgba(255,140,70,.5)}
+    }
     @keyframes heroFadeIn{to{opacity:1; transform:translateY(0);}}
 
-    /* === Social Buttons === */
-    .social{display:flex; flex-direction:column; gap:16px; margin:20px 0; width:100%; max-width:420px; z-index:2;}
+    /* === Social Buttons (YouTube, TikTok, Website, WhatsApp) === */
+    .social{
+      display:flex; flex-direction:column; gap:16px;
+      margin:10px 0; width:100%; max-width:420px; z-index:2;
+    }
     .social a{
       display:flex; align-items:center; justify-content:center; gap:10px;
-      padding:16px; border-radius:14px; font-weight:600; font-size:1rem;
-      color:#fff; text-decoration:none; background:var(--glass-bg);
+      padding:16px; border-radius:14px; text-decoration:none; font-weight:600;
+      font-size:1rem; color:#fff; background:var(--glass-bg);
       border:1px solid var(--glass-border); backdrop-filter:blur(14px);
-      position:relative; overflow:hidden;
+      -webkit-backdrop-filter:blur(14px);
+      transition:.3s; position:relative; overflow:hidden;
       opacity:0; transform:translateX(-60px);
       animation:socialSlideIn .8s ease forwards;
-      transition:.3s;
     }
     .social a i{font-size:1.2rem;}
     .social a:nth-child(1){animation-delay:1s;}
     .social a:nth-child(2){animation-delay:1.3s;}
     .social a:nth-child(3){animation-delay:1.6s;}
     .social a:nth-child(4){animation-delay:1.9s;}
-
     @keyframes socialSlideIn{to{opacity:1; transform:translateX(0);}}
 
-    /* Efek tombol */
-    .social a::after{
-      content:""; position:absolute; top:0; left:-80px; width:50px; height:100%;
-      background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);
-      transform:skewX(-25deg);
+    .youtube{border:1px solid var(--phoenix-red);}
+    .tiktok{border:1px solid var(--phoenix-cyan);}
+    .website{border:1px solid var(--phoenix-amber);}
+    .whatsapp{border:1px solid var(--phoenix-green);}
+
+    /* === Follow Section === */
+    .follow-section{
+      text-align:center; font-size:.95rem; color:#ccc;
+      margin:20px 0 30px; opacity:0; transform:translateY(40px);
+      animation:fadeUp 1s ease 2.3s forwards;
     }
-    .social a:hover::after{left:120%; transition:1s;}
-    .social a:hover{transform:scale(.97); box-shadow:0 0 15px rgba(255,255,255,.2);}
-    .youtube{border:1px solid var(--phoenix-red); box-shadow:0 0 10px rgba(255,0,0,.3);}
-    .tiktok{border:1px solid var(--phoenix-cyan); box-shadow:0 0 10px rgba(0,242,234,.3);}
-    .website{border:1px solid var(--phoenix-amber); box-shadow:0 0 10px rgba(255,159,67,.3);}
-    .whatsapp{border:1px solid var(--phoenix-green); box-shadow:0 0 10px rgba(37,211,102,.3);}
+    .follow-section p{margin-bottom:10px;}
+    .follow-links{
+      display:flex; justify-content:center; gap:20px; font-size:1.1rem;
+    }
+    .follow-links a{
+      color:var(--phoenix-orange); font-weight:600;
+      text-decoration:none; transition:.3s;
+    }
+    .follow-links a:hover{color:var(--phoenix-amber); transform:scale(1.1);}
+    @keyframes fadeUp{to{opacity:1; transform:translateY(0);}}
 
     /* === Branch Button === */
     .btn-branch{
-      position:fixed; bottom:60px; left:50%; transform:translateX(-50%);
-      background:linear-gradient(135deg,#ff6b35,#ff9f43);
-      border:none; padding:16px; border-radius:14px;
-      font-size:1rem; font-weight:600; cursor:pointer; color:#fff;
-      width:90%; max-width:420px; transition:.3s; z-index:1002;
-      box-shadow:0 0 16px rgba(255,107,53,.45);
+      position:fixed; bottom:60px; left:50%;
+      transform:translateX(-50%); background:linear-gradient(135deg,#ff6b35,#ff9f43);
+      border:none; padding:16px; border-radius:14px; font-size:1rem; font-weight:600;
+      cursor:pointer; color:#fff; width:90%; max-width:420px;
+      transition:.3s; box-shadow:0 0 16px rgba(255,107,53,.45);
+      z-index:1002; animation:slideUp 1s ease 3s forwards;
+      opacity:0; transform:translate(-50%,40px);
     }
-    .btn-branch:hover{transform:translateX(-50%) scale(.97); box-shadow:0 0 25px rgba(255,107,53,.6);}
+    @keyframes slideUp{to{opacity:1; transform:translate(-50%,0);}}
 
-    /* === Popup === */
-    .popup-overlay{position:fixed; inset:0; display:flex; align-items:flex-end; justify-content:center; background:rgba(0,0,0,.6); backdrop-filter:blur(8px); z-index:2000; opacity:0; pointer-events:none; transition:opacity .4s;}
-    .popup-overlay.active{opacity:1; pointer-events:auto}
-    .popup{background:rgba(20,20,20,.95); backdrop-filter:blur(16px); padding:25px; border-radius:20px 20px 0 0; width:100%; max-height:70vh; overflow-y:auto; position:relative; transform:translateY(100%); transition:transform .35s ease;}
+    /* === Popup (Phoenix Style) === */
+    .popup-overlay{
+      position:fixed; inset:0; display:flex;
+      align-items:flex-end; justify-content:center;
+      background:rgba(0,0,0,.65); backdrop-filter:blur(10px);
+      z-index:2000; opacity:0; pointer-events:none; transition:opacity .4s;
+    }
+    .popup-overlay.active{opacity:1; pointer-events:auto;}
+
+    .popup{
+      background: linear-gradient(160deg, rgba(15,15,15,0.95), rgba(30,20,15,0.95));
+      backdrop-filter: blur(16px);
+      padding:25px; border-radius:20px 20px 0 0; width:100%; max-height:70vh;
+      overflow-y:auto; position:relative;
+      transform:translateY(100%); transition:transform .4s ease;
+      border-top:3px solid var(--phoenix-orange);
+      box-shadow:0 -8px 40px rgba(255,107,53,.35);
+    }
     .popup.active{transform:translateY(0);}
-    .popup::before{content:""; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--phoenix-orange),var(--phoenix-amber),#ff3c00);}
-    .popup .indicator{width:50px; height:5px; background:rgba(255,255,255,.2); border-radius:3px; margin:10px auto;}
-    .popup h2{text-align:center; margin:10px 0 15px; color:var(--phoenix-amber);}
-    .popup .close{position:absolute; top:10px; right:18px; background:none; border:none; font-size:1.6rem; color:#fff; cursor:pointer;}
-    .popup a{display:block; background:rgba(255,255,255,.08); padding:14px; border-radius:12px; margin:8px 0; color:#fff; font-weight:600; text-decoration:none; transition:.3s;}
-    .popup a:hover{background:rgba(255,107,53,.25); color:var(--phoenix-amber);}
+    .popup::before{
+      content:""; position:absolute; top:0; left:0; right:0; height:3px;
+      background:linear-gradient(90deg, var(--phoenix-orange), var(--phoenix-amber), var(--phoenix-orange));
+      background-size:200% 100%; animation:glowBar 3s linear infinite; z-index:2;
+    }
+    @keyframes glowBar {0%{background-position:0 0;}100%{background-position:200% 0;}}
 
-    /* === CTA Scrolling === */
-    .cta-container{margin-top:15px; width:100%; overflow:hidden;}
-    .cta-scroll{display:flex; gap:50px; white-space:nowrap; animation:marquee 20s linear infinite; font-weight:600; font-size:1rem; color:var(--phoenix-amber);}
-    @keyframes marquee{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+    /* Canvas ember popup */
+    #popupEmber{
+      position:absolute; inset:0; width:100%; height:100%;
+      z-index:0; pointer-events:none;
+    }
+    .popup .indicator,
+    .popup h2,
+    .popup .store-btn,
+    .popup .close{ position:relative; z-index:3; }
+
+    .popup .indicator{
+      width:50px; height:5px; background:rgba(255,255,255,.2);
+      border-radius:3px; margin:10px auto;
+    }
+    .popup h2{
+      text-align:center; margin:10px 0 15px; color:var(--phoenix-amber);
+    }
+    .popup .close{
+      position:absolute; top:10px; right:18px; background:none;
+      border:none; font-size:1.6rem; color:#fff; cursor:pointer; z-index:4;
+    }
+
+    /* Tombol store di popup (glass + animasi) */
+    .popup .store-btn{
+      display:flex; align-items:center; gap:10px;
+      background:var(--glass-bg);
+      border:1px solid var(--glass-border);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      padding:14px 16px; border-radius:12px; margin:10px 0;
+      color:#fff; font-weight:600; text-decoration:none; transition:.3s; z-index:3;
+      opacity:0; transform:translateX(-60px);
+      animation:storeSlideIn .75s ease forwards;
+    }
+    .popup .store-btn i{font-size:1.2rem; color:var(--phoenix-amber);}
+    .popup .store-btn:hover{
+      background:rgba(255,107,53,.25); color:var(--phoenix-amber);
+      transform:translateX(0) translateY(-2px);
+      box-shadow:0 0 12px rgba(255,107,53,.4);
+    }
+    @keyframes storeSlideIn{to{opacity:1; transform:translateX(0);} }
 
     /* === Footer === */
-    footer{position:fixed; bottom:0; left:0; right:0; padding:12px 0; background:rgba(0,0,0,.8); backdrop-filter:blur(6px); text-align:center; font-size:.85rem; color:#777; z-index:1000;}
+    footer{
+      position:fixed; bottom:0; left:0; right:0; padding:12px 0;
+      background:rgba(0,0,0,.8); backdrop-filter:blur(6px);
+      border-top:1px solid rgba(255,255,255,.08);
+      text-align:center; font-size:.85rem; color:#777; z-index:1000;
+    }
+    footer::before{
+      content:""; position:absolute; top:0; left:50%; transform:translateX(-50%);
+      width:80%; height:2px; background:linear-gradient(90deg,transparent,var(--phoenix-orange),transparent);
+    }
   </style>
 </head>
 <body>
@@ -139,64 +217,267 @@
     <a href="#" class="whatsapp" id="whatsappBtn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
   </div>
 
-  <button class="btn-branch" id="openPopup">📍 Lokasi Cabang</button>
-
-  <div class="popup-overlay" id="popupOverlay">
-    <div class="popup" id="popupBox">
-      <div class="indicator"></div>
-      <button class="close" id="closePopup">✖</button>
-      <h2>📍 Lokasi Cabang Phoenix</h2>
-      <a href="https://maps.app.goo.gl/Y8GifwrGXPv5HLpY6?g_st=ipc" target="_blank">Store 1 - Alam Sutera</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Roxy" target="_blank">Store 2 - Roxy</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Pademangan" target="_blank">Store 3 - Pademangan</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Jembatan+Besi" target="_blank">Store 5 - Jembatan Besi</a>
-      <a href="https://maps.app.goo.gl/D72zZYGnVe4GAE1o6?g_st=ipc" target="_blank">Store 6 - Binus Center</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Raden+Saleh" target="_blank">Store 7 - Raden Saleh</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Ciledug" target="_blank">Store 8 - Ciledug</a>
-      <a href="https://maps.app.goo.gl/KbGqkM7eVME5Qn4w9?g_st=iw" target="_blank">Store 9 - Ceger</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Pluit" target="_blank">Store 11 - Pluit</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Mangga+Besar" target="_blank">Store 13 - Mangga Besar</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Lokasari" target="_blank">Store 18 - Lokasari</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Untar" target="_blank">Store 68 - Untar</a>
+  <div class="follow-section">
+    <p>untuk update seputar <b>device</b>, <b>liquid</b> dan lain lain:</p>
+    <div class="follow-links">
+      <a href="https://www.instagram.com/phoenixvs.official"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://www.youtube.com/@PhoenixOfficial-r6j"><i class="fab fa-youtube"></i> YouTube</a>
+      <a href="https://www.tiktok.com/@phoenixvs.official"><i class="fab fa-tiktok"></i> TikTok</a>
     </div>
   </div>
 
-  <div class="cta-container">
-    <div class="cta-scroll">
-      👉 Follow Instagram • TikTok • YouTube Phoenix biar gak ketinggalan event 🔥
+  <button class="btn-branch" id="openPopup">📍 Lokasi Cabang</button>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popupOverlay" aria-hidden="true">
+    <div class="popup" id="popupBox" aria-modal="true" role="dialog">
+      <canvas id="popupEmber"></canvas>
+      <div class="indicator"></div>
+      <button class="close" id="closePopup" aria-label="Tutup">✖</button>
+      <h2>📍 Lokasi Cabang Phoenix</h2>
+
+      <!-- Tombol cabang -->
+      <a href="https://maps.app.goo.gl/Y8GifwrGXPv5HLpY6?g_st=ipc" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 1 - Alam Sutera</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Roxy" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 2 - Roxy</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Pademangan" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 3 - Pademangan</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Jembatan+Besi" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 5 - Jembatan Besi</a>
+      <a href="https://maps.app.goo.gl/D72zZYGnVe4GAE1o6?g_st=ipc" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 6 - Binus Center</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Raden+Saleh" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 7 - Raden Saleh</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Ciledug" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 8 - Ciledug</a>
+      <a href="https://maps.app.goo.gl/KbGqkM7eVME5Qn4w9?g_st=iw" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 9 - Ceger</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Pluit" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 11 - Pluit</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Mangga+Besar" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 13 - Mangga Besar</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Lokasari" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 18 - Lokasari</a>
+      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Untar" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 68 - Untar</a>
     </div>
   </div>
 
   <footer>© 2025 Phoenix Vape & Coffee</footer>
 
   <script>
-    const popupOverlay=document.getElementById('popupOverlay');
-    const popupBox=document.getElementById('popupBox');
-    const openPopup=document.getElementById('openPopup');
-    const closePopup=document.getElementById('closePopup');
-    const whatsappBtn=document.getElementById('whatsappBtn');
+    /* ======= Popup robust logic ======= */
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupBox = document.getElementById('popupBox');
+    const openPopup = document.getElementById('openPopup');
+    const closePopup = document.getElementById('closePopup');
+    const whatsappBtn = document.getElementById('whatsappBtn');
 
-    function openPop(){popupOverlay.classList.add('active');popupBox.classList.add('active');document.body.classList.add('noscroll');}
-    function closePop(){popupOverlay.classList.remove('active');popupBox.classList.remove('active');document.body.classList.remove('noscroll');popupBox.style.transform="translateY(100%)";setTimeout(()=>{popupBox.style.transform="";},300);}
-    openPopup.addEventListener('click',openPop);
-    closePopup.addEventListener('click',closePop);
-    popupOverlay.addEventListener('click',(e)=>{if(e.target===popupOverlay)closePop();});
+    let isOpen = false;
+    let isAnimating = false;
 
-    // swipe close
-    let startY=0,currentY=0;
-    popupBox.addEventListener("touchstart",(e)=>{startY=e.touches[0].clientY;});
-    popupBox.addEventListener("touchmove",(e)=>{currentY=e.touches[0].clientY-startY;if(currentY>0){popupBox.style.transform=`translateY(${currentY}px)`;}});
-    popupBox.addEventListener("touchend",()=>{if(currentY>150){closePop();}else{popupBox.style.transform="translateY(0)";}startY=0;currentY=0;});
+    function openPop(){
+      if (isOpen || isAnimating) return;
+      isAnimating = true;
+      popupOverlay.classList.add('active');
+      document.body.classList.add('noscroll');
+      void popupBox.offsetHeight; // force reflow
+      popupBox.classList.add('active');
+      popupOverlay.setAttribute('aria-hidden','false');
+
+      // 🔥 Stagger animasi tombol store (fade-in kiri→kanan)
+      const stores = popupBox.querySelectorAll('.store-btn');
+      stores.forEach((btn, idx) => {
+        btn.style.animationDelay = (0.2 + idx * 0.2) + 's';
+      });
+
+      startPopupEmber();
+    }
+
+    function closePop(){
+      if (!isOpen || isAnimating) return;
+      isAnimating = true;
+      popupBox.classList.remove('active');
+    }
+
+    popupBox.addEventListener('transitionend', (e)=>{
+      if (e.propertyName !== 'transform') return;
+      if (popupBox.classList.contains('active')) {
+        isOpen = true;
+        isAnimating = false;
+        popupBox.style.transform = '';
+      } else {
+        popupOverlay.classList.remove('active');
+        popupOverlay.setAttribute('aria-hidden','true');
+        document.body.classList.remove('noscroll');
+        popupBox.style.transform = 'translateY(100%)';
+        void popupBox.offsetHeight;
+        popupBox.style.transform = '';
+        isOpen = false;
+        isAnimating = false;
+        stopPopupEmber();
+      }
+    });
+
+    openPopup.addEventListener('click', openPop);
+    closePopup.addEventListener('click', closePop);
+    popupOverlay.addEventListener('click', (e)=>{ if(e.target===popupOverlay) closePop(); });
+
+    // Swipe close (natural, tidak terlalu sensitif)
+    let startY=0, deltaY=0;
+    popupBox.addEventListener('touchstart',(e)=>{
+      if (!isOpen || isAnimating) return;
+      startY = e.touches[0].clientY; deltaY = 0;
+    }, {passive:true});
+    popupBox.addEventListener('touchmove',(e)=>{
+      if (!isOpen || isAnimating) return;
+      deltaY = Math.max(0, e.touches[0].clientY - startY);
+      if (deltaY > 0) popupBox.style.transform = `translateY(${deltaY}px)`;
+    }, {passive:true});
+    popupBox.addEventListener('touchend',()=>{
+      if (!isOpen || isAnimating) return;
+      const threshold = 160;
+      if (deltaY > threshold) {
+        popupBox.style.transform = '';
+        closePop();
+      } else {
+        popupBox.style.transition = 'transform .25s ease';
+        popupBox.style.transform = 'translateY(0)';
+        setTimeout(()=>{
+          popupBox.style.transition = '';
+          popupBox.style.transform = '';
+        }, 250);
+      }
+      startY = 0; deltaY = 0;
+    });
 
     // WhatsApp
-    whatsappBtn.addEventListener('click',(e)=>{e.preventDefault();const number='6285778919857';const msg=encodeURIComponent('Hai Phoenix, saya tertarik dengan produk Phoenix, boleh info lebih lanjut?');window.open(`https://wa.me/${number}?text=${msg}`,'_blank');});
+    whatsappBtn.addEventListener('click',(e)=>{
+      e.preventDefault();
+      const number='6285778919857';
+      const msg=encodeURIComponent('Hai Phoenix, saya tertarik dengan produk Phoenix, boleh info lebih lanjut?');
+      window.open(`https://wa.me/${number}?text=${msg}`,'_blank');
+    });
 
-    // Ember Background
-    const canvas=document.getElementById('emberCanvas');const ctx=canvas.getContext('2d');let particles=[];
-    function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}window.addEventListener('resize',resize);resize();
-    class Particle{constructor(type='ember'){this.type=type;this.reset(true);}reset(initial=false){this.x=Math.random()*canvas.width;this.y=initial?(canvas.height*Math.random()):(canvas.height+Math.random()*200);this.size=this.type==='ember'?(Math.random()*4+2):(Math.random()*2+1);this.speedY=this.type==='ember'?(Math.random()*1.5+0.5):(Math.random()*0.8+0.3);this.alpha=Math.random()*0.5+0.5;this.color=(this.type==='ember')?(Math.random()>0.5?'255,120,50':'255,200,50'):'255,255,200';this.wind=(Math.random()-0.5)*0.5;}update(){this.y-=this.speedY;this.x+=this.wind;if(this.y<-10){this.reset(false);}}draw(){const r=this.size*3;const g=ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,r);g.addColorStop(0,`rgba(${this.color},${this.alpha})`);g.addColorStop(1,`rgba(${this.color},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(this.x,this.y,r,0,Math.PI*2);ctx.fill();}}
-    function initParticles(){particles=[];for(let i=0;i<80;i++)particles.push(new Particle('ember'));for(let i=0;i<40;i++)particles.push(new Particle('spark'));}
-    function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}initParticles();animate();
+    /* ======= Ember background global (retina-aware) ======= */
+    const canvas = document.getElementById('emberCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let viewW = 0, viewH = 0;
+
+    function resizeGlobal(){
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      viewW = window.innerWidth; viewH = window.innerHeight;
+      canvas.width = Math.floor(viewW * dpr);
+      canvas.height = Math.floor(viewH * dpr);
+      canvas.style.width = viewW + 'px';
+      canvas.style.height = viewH + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // draw in CSS pixels
+    }
+    window.addEventListener('resize', resizeGlobal);
+    resizeGlobal();
+
+    class Particle{
+      constructor(type='ember'){ this.type=type; this.reset(true); }
+      reset(initial=false){
+        this.x = Math.random()*viewW;
+        this.y = initial ? (Math.random()*viewH) : (viewH + Math.random()*200);
+        this.size = this.type==='ember' ? (Math.random()*4+2) : (Math.random()*2+1);
+        this.speedY = this.type==='ember' ? (Math.random()*1.5+0.5) : (Math.random()*0.8+0.3);
+        this.alpha = Math.random()*0.5+0.5;
+        this.color = (this.type==='ember') ? (Math.random()>0.5?'255,120,50':'255,200,50') : '255,255,200';
+        this.wind = (Math.random()-0.5)*0.5;
+      }
+      update(){
+        this.y -= this.speedY;
+        this.x += this.wind;
+        if (this.y < -10) this.reset(false);
+      }
+      draw(){
+        const r = this.size*3;
+        const g = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,r);
+        g.addColorStop(0,`rgba(${this.color},${this.alpha})`);
+        g.addColorStop(1,`rgba(${this.color},0)`);
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,r,0,Math.PI*2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles(){
+      particles = [];
+      for(let i=0;i<80;i++) particles.push(new Particle('ember'));
+      for(let i=0;i<40;i++) particles.push(new Particle('spark'));
+    }
+    function animateGlobal(){
+      ctx.clearRect(0,0,viewW,viewH);
+      particles.forEach(p=>{p.update();p.draw();});
+      requestAnimationFrame(animateGlobal);
+    }
+    initParticles();
+    animateGlobal();
+
+    /* ======= Ember khusus popup (retina-aware) ======= */
+    const popupCanvas = document.getElementById('popupEmber');
+    const pctx = popupCanvas.getContext('2d');
+    let pParticles = [];
+    let popupAF = null;
+    let popW = 0, popH = 0;
+
+    function resizePopupCanvas(){
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      popW = popupBox.clientWidth; popH = popupBox.clientHeight;
+      popupCanvas.width = Math.floor(popW * dpr);
+      popupCanvas.height = Math.floor(popH * dpr);
+      popupCanvas.style.width = popW + 'px';
+      popupCanvas.style.height = popH + 'px';
+      pctx.setTransform(dpr, 0, 0, dpr, 0, 0); // draw in CSS pixels
+    }
+
+    class PopupParticle{
+      constructor(type='ember'){ this.type=type; this.reset(true); }
+      reset(initial=false){
+        this.x = Math.random()*popW;
+        this.y = initial ? (Math.random()*popH) : (popH + 50);
+        this.size = this.type==='ember' ? (Math.random()*3+1) : (Math.random()*1.5+0.5);
+        this.speedY = this.type==='ember' ? (Math.random()*1+0.3) : (Math.random()*0.5+0.2);
+        this.alpha = Math.random()*0.5+0.5;
+        this.color = this.type==='ember' ? (Math.random()>0.5?'255,120,50':'255,200,50') : '255,255,200';
+        this.wind = (Math.random()-0.5)*0.4;
+      }
+      update(){
+        this.y -= this.speedY;
+        this.x += this.wind;
+        if(this.y < -10) this.reset(false);
+      }
+      draw(){
+        const r = this.size*3;
+        const g = pctx.createRadialGradient(this.x,this.y,0,this.x,this.y,r);
+        g.addColorStop(0,`rgba(${this.color},${this.alpha})`);
+        g.addColorStop(1,`rgba(${this.color},0)`);
+        pctx.fillStyle = g;
+        pctx.beginPath();
+        pctx.arc(this.x,this.y,r,0,Math.PI*2);
+        pctx.fill();
+      }
+    }
+
+    function initPopupParticles(){
+      pParticles = [];
+      for(let i=0;i<40;i++) pParticles.push(new PopupParticle('ember'));
+      for(let i=0;i<20;i++) pParticles.push(new PopupParticle('spark'));
+    }
+
+    function loopPopup(){
+      pctx.clearRect(0,0,popW,popH);
+      pParticles.forEach(p=>{p.update();p.draw();});
+      popupAF = requestAnimationFrame(loopPopup);
+    }
+
+    function startPopupEmber(){
+      resizePopupCanvas();
+      initPopupParticles();
+      if (popupAF) cancelAnimationFrame(popupAF);
+      popupAF = requestAnimationFrame(loopPopup);
+      window.addEventListener('resize', resizePopupCanvas);
+    }
+
+    function stopPopupEmber(){
+      if (popupAF) cancelAnimationFrame(popupAF);
+      popupAF = null;
+      pctx.clearRect(0,0,popW,popH);
+      window.removeEventListener('resize', resizePopupCanvas);
+    }
   </script>
 </body>
 </html>
