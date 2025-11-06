@@ -4,9 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Phoenix Vape & Coffee | Link Bio</title>
+
   <link rel="icon" href="logo.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     :root{
       --phoenix-orange:#ff6b35;
@@ -16,16 +18,16 @@
       --phoenix-green:#25d366;
       --glass-bg:rgba(255,255,255,.05);
       --glass-border:rgba(255,255,255,.2);
+      --bottom-gap:160px; /* untuk jaga jarak dari tombol/ footer */
+      --top-lift:18px;    /* geser konten agak ke atas */
     }
 
     *{margin:0;padding:0;box-sizing:border-box}
     body{
       font-family:'Poppins',sans-serif;
       background:#000; color:#fff;
-      min-height:100vh; display:flex;
-      flex-direction:column; align-items:center;
-      justify-content:flex-start;
-      padding:20px; padding-bottom:200px;
+      min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+      padding:20px; padding-bottom:calc(var(--bottom-gap) + 40px);
       position:relative; overflow-x:hidden;
     }
     body.noscroll{overflow:hidden;}
@@ -37,7 +39,7 @@
     }
 
     /* === Hero === */
-    .hero{text-align:center; margin:10px 0 20px; z-index:2;}
+    .hero{ text-align:center; margin:10px 0 20px; z-index:2; position:relative; top:calc(-1*var(--top-lift)); }
     .hero img{
       width:120px; border-radius:50%;
       border:5px solid var(--phoenix-orange);
@@ -64,10 +66,11 @@
     }
     @keyframes heroFadeIn{to{opacity:1; transform:translateY(0);}}
 
-    /* === Social Buttons (YouTube, TikTok, Website, WhatsApp) === */
+    /* === Social Buttons === */
     .social{
       display:flex; flex-direction:column; gap:16px;
-      margin:10px 0; width:100%; max-width:420px; z-index:2;
+      margin:6px 0; width:100%; max-width:420px; z-index:2;
+      position:relative; top:calc(-1*var(--top-lift));
     }
     .social a{
       display:flex; align-items:center; justify-content:center; gap:10px;
@@ -84,43 +87,43 @@
     .social a:nth-child(2){animation-delay:1.3s;}
     .social a:nth-child(3){animation-delay:1.6s;}
     .social a:nth-child(4){animation-delay:1.9s;}
+    .social a:nth-child(5){animation-delay:2.2s;}
     @keyframes socialSlideIn{to{opacity:1; transform:translateX(0);}}
 
     .youtube{border:1px solid var(--phoenix-red);}
     .tiktok{border:1px solid var(--phoenix-cyan);}
-    .website{border:1px solid var(--phoenix-amber);}
+    .website,.email{border:1px solid var(--phoenix-amber);}
     .whatsapp{border:1px solid var(--phoenix-green);}
 
     /* === Follow Section === */
     .follow-section{
       text-align:center; font-size:.95rem; color:#ccc;
-      margin:20px 0 30px; opacity:0; transform:translateY(40px);
-      animation:fadeUp 1s ease 2.3s forwards;
+      margin:8px 0 30px; position:relative; top:calc(-1*var(--top-lift));
+      margin-bottom:calc(var(--bottom-gap) + 12px);
+      opacity:0; transform:translateY(40px);
+      animation:fadeUp 1s ease 2.5s forwards;
     }
     .follow-section p{margin-bottom:10px;}
-    .follow-links{
-      display:flex; justify-content:center; gap:20px; font-size:1.1rem;
-    }
+    .follow-links{ display:flex; justify-content:center; gap:20px; font-size:1.1rem; }
     .follow-links a{
-      color:var(--phoenix-orange); font-weight:600;
-      text-decoration:none; transition:.3s;
+      color:var(--phoenix-orange); font-weight:600; text-decoration:none; transition:.3s;
     }
     .follow-links a:hover{color:var(--phoenix-amber); transform:scale(1.1);}
     @keyframes fadeUp{to{opacity:1; transform:translateY(0);}}
 
     /* === Branch Button === */
     .btn-branch{
-      position:fixed; bottom:60px; left:50%;
-      transform:translateX(-50%); background:linear-gradient(135deg,#ff6b35,#ff9f43);
+      position:fixed; left:50%; transform:translateX(-50%);
+      bottom:calc(16px + env(safe-area-inset-bottom,0));
+      background:linear-gradient(135deg,#ff6b35,#ff9f43);
       border:none; padding:16px; border-radius:14px; font-size:1rem; font-weight:600;
       cursor:pointer; color:#fff; width:90%; max-width:420px;
       transition:.3s; box-shadow:0 0 16px rgba(255,107,53,.45);
-      z-index:1002; animation:slideUp 1s ease 3s forwards;
-      opacity:0; transform:translate(-50%,40px);
+      z-index:1002; animation:slideUp 1s ease 3s forwards; opacity:0;
     }
-    @keyframes slideUp{to{opacity:1; transform:translate(-50%,0);}}
+    @keyframes slideUp{to{opacity:1;}}
 
-    /* === Popup (Phoenix Style) === */
+    /* === Popup === */
     .popup-overlay{
       position:fixed; inset:0; display:flex;
       align-items:flex-end; justify-content:center;
@@ -130,31 +133,41 @@
     .popup-overlay.active{opacity:1; pointer-events:auto;}
 
     .popup{
-      background: linear-gradient(160deg, rgba(15,15,15,0.95), rgba(30,20,15,0.95));
-      backdrop-filter: blur(16px);
+      background:linear-gradient(160deg,rgba(15,15,15,.95),rgba(30,20,15,.95));
+      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
       padding:25px; border-radius:20px 20px 0 0; width:100%; max-height:70vh;
-      overflow-y:auto; position:relative;
+      overflow:hidden; /* ← scroll pindah ke .popup-content */
+      position:relative;
       transform:translateY(100%); transition:transform .4s ease;
       border-top:3px solid var(--phoenix-orange);
       box-shadow:0 -8px 40px rgba(255,107,53,.35);
+      will-change:transform;
     }
     .popup.active{transform:translateY(0);}
-    .popup::before{
-      content:""; position:absolute; top:0; left:0; right:0; height:3px;
-      background:linear-gradient(90deg, var(--phoenix-orange), var(--phoenix-amber), var(--phoenix-orange));
-      background-size:200% 100%; animation:glowBar 3s linear infinite; z-index:2;
-    }
-    @keyframes glowBar {0%{background-position:0 0;}100%{background-position:200% 0;}}
 
-    /* Canvas ember popup */
+    /* Ember popup canvas */
     #popupEmber{
       position:absolute; inset:0; width:100%; height:100%;
       z-index:0; pointer-events:none;
     }
-    .popup .indicator,
-    .popup h2,
-    .popup .store-btn,
-    .popup .close{ position:relative; z-index:3; }
+
+    /* Isi popup (scrollable) */
+    .popup-content{
+      position:relative; z-index:3; max-height:70vh;
+      overflow-y:auto; -webkit-overflow-scrolling:touch;
+      padding-bottom:16px; border-radius:20px 20px 0 0;
+      isolation:isolate; background:transparent;
+    }
+
+    /* Bar oranye ikut isi (anti "nyangkut") */
+    .topbar{
+      height:3px;
+      background:linear-gradient(90deg,var(--phoenix-orange),var(--phoenix-amber),var(--phoenix-orange));
+      background-size:200% 100%;
+      animation:glowBar 3s linear infinite;
+      position:sticky; top:0; left:0; right:0; z-index:5;
+    }
+    @keyframes glowBar{0%{background-position:0 0;}100%{background-position:200% 0;}}
 
     .popup .indicator{
       width:50px; height:5px; background:rgba(255,255,255,.2);
@@ -165,20 +178,17 @@
     }
     .popup .close{
       position:absolute; top:10px; right:18px; background:none;
-      border:none; font-size:1.6rem; color:#fff; cursor:pointer; z-index:4;
+      border:none; font-size:1.6rem; color:#fff; cursor:pointer; z-index:5;
     }
 
-    /* Tombol store di popup (glass + animasi) */
+    /* Tombol store */
     .popup .store-btn{
       display:flex; align-items:center; gap:10px;
-      background:var(--glass-bg);
-      border:1px solid var(--glass-border);
-      backdrop-filter:blur(14px);
-      -webkit-backdrop-filter:blur(14px);
-      padding:14px 16px; border-radius:12px; margin:10px 0;
-      color:#fff; font-weight:600; text-decoration:none; transition:.3s; z-index:3;
-      opacity:0; transform:translateX(-60px);
-      animation:storeSlideIn .75s ease forwards;
+      background:var(--glass-bg); border:1px solid var(--glass-border);
+      backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      padding:14px 16px; border-radius:12px; margin:10px 16px;
+      color:#fff; font-weight:600; text-decoration:none; transition:.3s;
+      opacity:0; transform:translateX(-60px); animation:storeSlideIn .75s ease forwards;
     }
     .popup .store-btn i{font-size:1.2rem; color:var(--phoenix-amber);}
     .popup .store-btn:hover{
@@ -188,12 +198,18 @@
     }
     @keyframes storeSlideIn{to{opacity:1; transform:translateX(0);} }
 
+    /* Drag state (anti-ghosting iOS) */
+    .popup.dragging,.popup-overlay.dragging{
+      backdrop-filter:none!important; -webkit-backdrop-filter:none!important;
+    }
+
     /* === Footer === */
     footer{
       position:fixed; bottom:0; left:0; right:0; padding:12px 0;
       background:rgba(0,0,0,.8); backdrop-filter:blur(6px);
       border-top:1px solid rgba(255,255,255,.08);
       text-align:center; font-size:.85rem; color:#777; z-index:1000;
+      padding-bottom:calc(12px + env(safe-area-inset-bottom,0));
     }
     footer::before{
       content:""; position:absolute; top:0; left:50%; transform:translateX(-50%);
@@ -214,6 +230,7 @@
     <a href="https://www.youtube.com/@PhoenixOfficial-r6j" class="youtube"><i class="fab fa-youtube"></i> YouTube</a>
     <a href="https://www.tiktok.com/@phoenixvs.official" class="tiktok"><i class="fab fa-tiktok"></i> TikTok</a>
     <a href="https://phoenixvape.co.id/" class="website"><i class="fas fa-globe"></i> Website</a>
+    <a href="mailto:phoenixvsofficial@gmail.com" class="email"><i class="fas fa-envelope"></i> Email</a>
     <a href="#" class="whatsapp" id="whatsappBtn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
   </div>
 
@@ -232,78 +249,79 @@
   <div class="popup-overlay" id="popupOverlay" aria-hidden="true">
     <div class="popup" id="popupBox" aria-modal="true" role="dialog">
       <canvas id="popupEmber"></canvas>
-      <div class="indicator"></div>
-      <button class="close" id="closePopup" aria-label="Tutup">✖</button>
-      <h2>📍 Lokasi Cabang Phoenix</h2>
 
-      <!-- Tombol cabang -->
-      <a href="https://maps.app.goo.gl/Y8GifwrGXPv5HLpY6?g_st=ipc" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 1 - Alam Sutera</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Roxy" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 2 - Roxy</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Pademangan" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 3 - Pademangan</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Jembatan+Besi" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 5 - Jembatan Besi</a>
-      <a href="https://maps.app.goo.gl/D72zZYGnVe4GAE1o6?g_st=ipc" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 6 - Binus Center</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Raden+Saleh" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 7 - Raden Saleh</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Ciledug" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 8 - Ciledug</a>
-      <a href="https://maps.app.goo.gl/KbGqkM7eVME5Qn4w9?g_st=iw" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 9 - Ceger</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Pluit" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 11 - Pluit</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Mangga+Besar" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 13 - Mangga Besar</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Lokasari" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 18 - Lokasari</a>
-      <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Untar" target="_blank" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 68 - Untar</a>
+      <!-- Isi scrollable -->
+      <div class="popup-content" id="popupContent">
+        <div class="topbar"></div>
+        <div class="indicator"></div>
+        <button class="close" id="closePopup" aria-label="Tutup">✖</button>
+        <h2>📍 Lokasi Cabang Phoenix</h2>
+
+        <!-- Tombol cabang -->
+        <a href="https://maps.app.goo.gl/Y8GifwrGXPv5HLpY6?g_st=ipc" target="_blank" rel="noopener" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 1 - Alam Sutera</a>
+        <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Roxy" target="_blank" rel="noopener" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 2 - Roxy</a>
+        <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Pademangan" target="_blank" rel="noopener" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 3 - Pademangan</a>
+        <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Jembatan+Besi" target="_blank" rel="noopener" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 5 - Jembatan Besi</a>
+        <a href="https://maps.app.goo.gl/D72zZYGnVe4GAE1o6?g_st=ipc" target="_blank" rel="noopener" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 6 - Binus Center</a>
+        <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Raden+Saleh" target="_blank" rel="noopener" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 7 - Raden Saleh</a>
+        <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Ciledug" target="_blank" rel="noopener" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 8 - Ciledug</a>
+        <a href="https://maps.app.goo.gl/KbGqkM7eVME5Qn4w9?g_st=iw" target="_blank" rel="noopener" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 9 - Ceger</a>
+        <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Pluit" target="_blank" rel="noopener" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 11 - Pluit</a>
+        <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Mangga+Besar" target="_blank" rel="noopener" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 13 - Mangga Besar</a>
+        <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Lokasari" target="_blank" rel="noopener" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 18 - Lokasari</a>
+        <a href="https://maps.google.com/?q=Phoenix+Vape+Coffee+Untar" target="_blank" rel="noopener" class="store-btn"><i class="fa-solid fa-location-dot"></i> Store 68 - Untar</a>
+      </div>
     </div>
   </div>
 
   <footer>© 2025 Phoenix Vape & Coffee</footer>
 
   <script>
-    /* ======= Popup robust logic ======= */
+    /* ======= Popup open/close ======= */
     const popupOverlay = document.getElementById('popupOverlay');
     const popupBox = document.getElementById('popupBox');
+    const popupContent = document.getElementById('popupContent');
     const openPopup = document.getElementById('openPopup');
     const closePopup = document.getElementById('closePopup');
     const whatsappBtn = document.getElementById('whatsappBtn');
 
-    let isOpen = false;
-    let isAnimating = false;
+    let isOpen=false, isAnimating=false;
 
     function openPop(){
-      if (isOpen || isAnimating) return;
-      isAnimating = true;
+      if(isOpen||isAnimating) return;
+      isAnimating=true;
       popupOverlay.classList.add('active');
       document.body.classList.add('noscroll');
-      void popupBox.offsetHeight; // force reflow
+      void popupBox.offsetHeight; /* force reflow */
       popupBox.classList.add('active');
       popupOverlay.setAttribute('aria-hidden','false');
 
-      // 🔥 Stagger animasi tombol store (fade-in kiri→kanan)
-      const stores = popupBox.querySelectorAll('.store-btn');
-      stores.forEach((btn, idx) => {
-        btn.style.animationDelay = (0.2 + idx * 0.2) + 's';
+      /* Stagger untuk tombol store */
+      popupBox.querySelectorAll('.store-btn').forEach((b,i)=>{
+        b.style.animationDelay=(0.2+i*0.2)+'s';
       });
 
       startPopupEmber();
     }
 
     function closePop(){
-      if (!isOpen || isAnimating) return;
-      isAnimating = true;
+      if(!isOpen||isAnimating) return;
+      isAnimating=true;
       popupBox.classList.remove('active');
     }
 
-    popupBox.addEventListener('transitionend', (e)=>{
-      if (e.propertyName !== 'transform') return;
-      if (popupBox.classList.contains('active')) {
-        isOpen = true;
-        isAnimating = false;
-        popupBox.style.transform = '';
-      } else {
+    popupBox.addEventListener('transitionend',(e)=>{
+      if(e.propertyName!=='transform') return;
+      if(popupBox.classList.contains('active')){
+        isOpen=true; isAnimating=false;
+        popupBox.style.transform='';
+      }else{
         popupOverlay.classList.remove('active');
         popupOverlay.setAttribute('aria-hidden','true');
         document.body.classList.remove('noscroll');
-        popupBox.style.transform = 'translateY(100%)';
-        void popupBox.offsetHeight;
-        popupBox.style.transform = '';
-        isOpen = false;
-        isAnimating = false;
+        popupBox.style.transform='translateY(100%)';
+        void popupBox.offsetHeight; popupBox.style.transform='';
+        isOpen=false; isAnimating=false;
         stopPopupEmber();
       }
     });
@@ -311,41 +329,65 @@
     openPopup.addEventListener('click', openPop);
     closePopup.addEventListener('click', closePop);
     popupOverlay.addEventListener('click', (e)=>{ if(e.target===popupOverlay) closePop(); });
+    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape'&&isOpen&&!isAnimating) closePop(); });
 
-    // Swipe close (natural, tidak terlalu sensitif)
-    let startY=0, deltaY=0;
+    /* ===== Swipe-to-close TANPA mematikan scroll =====
+       - Aktif jika gesture dimulai saat isi di top (scrollTop<=0) dan gerak ke bawah.
+       - Saat drag aktif, yang digeser adalah .popup (kontainer), bukan isi.
+    */
+    let startY=0, deltaY=0, dragging=false, canDrag=false;
+
     popupBox.addEventListener('touchstart',(e)=>{
-      if (!isOpen || isAnimating) return;
-      startY = e.touches[0].clientY; deltaY = 0;
+      if(!isOpen||isAnimating) return;
+      startY = e.touches[0].clientY;
+      deltaY = 0;
+      canDrag = (popupContent.scrollTop <= 0); // hanya kalau isi di paling atas
     }, {passive:true});
+
     popupBox.addEventListener('touchmove',(e)=>{
-      if (!isOpen || isAnimating) return;
-      deltaY = Math.max(0, e.touches[0].clientY - startY);
-      if (deltaY > 0) popupBox.style.transform = `translateY(${deltaY}px)`;
-    }, {passive:true});
-    popupBox.addEventListener('touchend',()=>{
-      if (!isOpen || isAnimating) return;
-      const threshold = 160;
-      if (deltaY > threshold) {
-        popupBox.style.transform = '';
-        closePop();
-      } else {
-        popupBox.style.transition = 'transform .25s ease';
-        popupBox.style.transform = 'translateY(0)';
-        setTimeout(()=>{
-          popupBox.style.transition = '';
-          popupBox.style.transform = '';
-        }, 250);
+      if(!isOpen||isAnimating) return;
+      const currentY = e.touches[0].clientY;
+      deltaY = currentY - startY;
+
+      if(canDrag && deltaY > 0){
+        if(!dragging){
+          dragging = true;
+          popupBox.classList.add('dragging');
+          popupOverlay.classList.add('dragging');
+          pausePopupEmber();
+        }
+        e.preventDefault(); // butuh passive:false
+        popupBox.style.transform = `translateY(${deltaY}px)`;
       }
-      startY = 0; deltaY = 0;
+    }, {passive:false});
+
+    popupBox.addEventListener('touchend',()=>{
+      if(!isOpen||isAnimating) return;
+      const threshold = 160;
+      if(dragging && deltaY > threshold){
+        popupBox.style.transform='';
+        dragging=false;
+        popupBox.classList.remove('dragging'); popupOverlay.classList.remove('dragging');
+        closePop();
+      }else{
+        popupBox.style.transition='transform .25s ease';
+        popupBox.style.transform='translateY(0)';
+        setTimeout(()=>{
+          popupBox.style.transition=''; popupBox.style.transform='';
+          dragging=false;
+          popupBox.classList.remove('dragging'); popupOverlay.classList.remove('dragging');
+          resumePopupEmber();
+        },250);
+      }
+      startY=0; deltaY=0; canDrag=false;
     });
 
-    // WhatsApp
+    /* ===== WhatsApp ===== */
     whatsappBtn.addEventListener('click',(e)=>{
       e.preventDefault();
       const number='6285778919857';
       const msg=encodeURIComponent('Hai Phoenix, saya tertarik dengan produk Phoenix, boleh info lebih lanjut?');
-      window.open(`https://wa.me/${number}?text=${msg}`,'_blank');
+      window.open(`https://wa.me/${number}?text=${msg}`,'_blank','noopener');
     });
 
     /* ======= Ember background global (retina-aware) ======= */
@@ -471,12 +513,33 @@
       popupAF = requestAnimationFrame(loopPopup);
       window.addEventListener('resize', resizePopupCanvas);
     }
-
     function stopPopupEmber(){
       if (popupAF) cancelAnimationFrame(popupAF);
       popupAF = null;
       pctx.clearRect(0,0,popW,popH);
       window.removeEventListener('resize', resizePopupCanvas);
+    }
+    function pausePopupEmber(){
+      if (popupAF) { cancelAnimationFrame(popupAF); popupAF = null; }
+    }
+    function resumePopupEmber(){
+      if (!popupAF) { popupAF = requestAnimationFrame(loopPopup); }
+    }
+
+    /* ======= Dynamic bottom-gap ======= */
+    function updateBottomGap(){
+      const btn = document.getElementById('openPopup');
+      const footer = document.querySelector('footer');
+      const btnH = btn ? btn.offsetHeight : 68;
+      const footH = footer ? footer.offsetHeight : 36;
+      const buffer = 24;
+      const gap = btnH + footH + buffer;
+      document.documentElement.style.setProperty('--bottom-gap', gap + 'px');
+    }
+    window.addEventListener('load', updateBottomGap);
+    window.addEventListener('resize', updateBottomGap);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(updateBottomGap);
     }
   </script>
 </body>
